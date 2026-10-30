@@ -1,0 +1,52 @@
+.boss {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+.boss[data-clip='false'] {
+  animation: boss-breathe 5.6s ease-in-out infinite;
+}
+
+.sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.8));
+}
+
+.boss[data-hp='hurt'] .sprite {
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.8)) saturate(0.85);
+}
+
+.boss[data-hp='wounded'] .sprite {
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.8)) saturate(0.65) brightness(0.9);
+}
+
+.boss[data-hp='critical'] .sprite {
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.8)) saturate(0.45) brightness(0.8);
+}
+
+.boss[data-clip='false'][data-hp='critical'] {
+  animation-duration: 2.4s;
+}
+
+@keyframes boss-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012) translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss[data-clip='false'] {
+    animation: none;
+  }
+}

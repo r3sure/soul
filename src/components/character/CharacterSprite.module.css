@@ -1,0 +1,54 @@
+.character {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+.character[data-clip='false'] {
+  animation: idle-bob 4.2s ease-in-out infinite;
+}
+
+.character[data-clip='false'][data-state='attack'] {
+  animation: attack-lunge 700ms ease-out;
+}
+
+.sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.65));
+}
+
+@keyframes idle-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.006);
+  }
+}
+
+@keyframes attack-lunge {
+  0% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-16px) translateX(10px) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character[data-clip='false'],
+  .character[data-clip='false'][data-state='attack'] {
+    animation: none;
+  }
+}

@@ -1,0 +1,163 @@
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+.home,
+.bosses,
+.guild,
+.tavern,
+.roulette {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: clamp(140px, 15vw, 190px);
+}
+
+.home {
+  top: 46%;
+  left: 16%;
+}
+
+.bosses {
+  top: 34%;
+  left: 41%;
+}
+
+.guild {
+  top: 46%;
+  left: 67%;
+}
+
+.tavern {
+  top: 72%;
+  left: 22%;
+}
+
+.roulette {
+  top: 72%;
+  left: 58%;
+}
+
+.board {
+  position: absolute;
+  top: 22%;
+  left: 82%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: clamp(150px, 16vw, 210px);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: linear-gradient(160deg, rgba(20, 16, 28, 0.92), rgba(6, 5, 10, 0.9));
+  box-shadow: var(--shadow-deep);
+  text-align: center;
+  opacity: 0.72;
+}
+
+.boardTitle {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.boardText {
+  font-size: 0.85rem;
+  color: var(--color-parchment);
+}
+
+.boardHint {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.factionBar {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: min(420px, 70vw);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: rgba(11, 9, 16, 0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.factionLight {
+  color: var(--color-light);
+}
+
+.factionDark {
+  color: var(--color-dark);
+}
+
+.factionTrack {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-dark);
+  overflow: hidden;
+}
+
+.factionFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  background: var(--color-light);
+}
+
+@media (max-width: 720px) {
+  .home,
+  .bosses,
+  .guild,
+  .tavern,
+  .roulette {
+    width: clamp(110px, 34vw, 150px);
+  }
+
+  .home {
+    top: 34%;
+    left: 24%;
+  }
+
+  .bosses {
+    top: 30%;
+    left: 72%;
+  }
+
+  .guild {
+    top: 54%;
+    left: 24%;
+  }
+
+  .tavern {
+    top: 52%;
+    left: 72%;
+  }
+
+  .roulette {
+    top: 74%;
+    left: 48%;
+  }
+
+  .board {
+    top: 12%;
+    left: 50%;
+  }
+
+  .factionBar {
+    bottom: var(--space-3);
+  }
+}
