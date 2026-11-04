@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AssetImage } from '@/components/ui/AssetImage';
 import { LocationLayout } from '@/components/ui/LocationLayout';
 import { bosses } from '@/data/bosses/bosses';
-import { formatNumber, formatPercent } from '@/lib/format';
+import { formatDuration, formatNumber, formatPercent } from '@/lib/format';
 import styles from './BossHallScreen.module.css';
 import type { BossConfig, BossState } from '@/game/types/game';
 
@@ -62,7 +62,7 @@ function BossCard({ boss }: { boss: BossConfig }) {
             </div>
             <div className={styles.statRow}>
               <span>До конца</span>
-              <span className={styles.timer}>{boss.endTimeLabel}</span>
+              <span className={styles.timer}>{formatDuration(boss.timeLeftSeconds ?? 0)}</span>
             </div>
           </>
         ) : (

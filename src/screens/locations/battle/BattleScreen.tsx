@@ -8,7 +8,7 @@ import { demoAttacks, demoParty, buildDemoBattle } from '@/data/battle/demo';
 import { findBoss } from '@/data/bosses/bosses';
 import { useClipState } from '@/game/animation/useClipState';
 import { resolveStageSprite } from '@/game/combat/stage';
-import { formatNumber, formatPercent } from '@/lib/format';
+import { formatDuration, formatNumber, formatPercent } from '@/lib/format';
 import styles from './BattleScreen.module.css';
 import type { PlayerCharacter } from '@/game/types/game';
 
@@ -27,11 +27,14 @@ function BattleView({ eventId }: { eventId: string }) {
   const { state: heroState, play: playHero, reset: resetHero } = useClipState();
   const { state: bossState, play: playBoss, reset: resetBoss } = useClipState();
   const [hp, setHp] = useState(battle.hp);
+  const [timeLeft, setTimeLeft] = useState(battle.timeLeftSeconds);
   const [cooldowns, setCooldowns] = useState<number[]>(() => demoAttacks.map(() => 0));
   const animationTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
+      setTimeLeft((current) => (current > 0 ? current - 1 : 0));
+
       setCooldowns((current) => {
         if (!current.some((seconds) => seconds > 0)) {
           return current;
@@ -59,6 +62,7 @@ function BattleView({ eventId }: { eventId: string }) {
 
   const hpPercent = (hp / battle.initialHp) * 100;
   const bossDefeated = hp <= 0;
+  const timeExpired = timeLeft <= 0;
   const stageSpriteId = resolveStageSprite(boss.stages, hpPercent);
   const featured = battle.featuredCharacterIds
     .map((id) => demoParty.find((character) => character.id === id))
@@ -68,7 +72,7 @@ function BattleView({ eventId }: { eventId: string }) {
     const attack = demoAttacks[index];
     const secondsLeft = cooldowns[index] ?? 0;
 
-    if (!attack || secondsLeft > 0 || bossDefeated) {
+    if (!attack || secondsLeft > 0 || bossDefeated || timeExpired) {
       return;
     }
 
@@ -114,7 +118,7 @@ function BattleView({ eventId }: { eventId: string }) {
 
           <div className={styles.timerBox}>
             <span className={styles.timerLabel}>До конца</span>
-            <span className={styles.timerValue}>{battle.timeLeftLabel}</span>
+            <span className={styles.timerValue}>{formatDuration(timeLeft)}</span>
           </div>
 
           <ol className={styles.miniBoard}>
@@ -160,7 +164,7 @@ function BattleView({ eventId }: { eventId: string }) {
         <div className={styles.actions}>
           {demoAttacks.map((attack, index) => {
             const secondsLeft = cooldowns[index] ?? 0;
-            const disabled = secondsLeft > 0 || bossDefeated;
+            const disabled = secondsLeft > 0 || bossDefeated || timeExpired;
 
             return (
               <button
@@ -182,9 +186,9 @@ function BattleView({ eventId }: { eventId: string }) {
                 </span>
                 <span
                   className={styles.attackCooldown}
-                  data-ready={secondsLeft === 0 && !bossDefeated ? 'true' : 'false'}
+                  data-ready={secondsLeft === 0 && !bossDefeated && !timeExpired ? 'true' : 'false'}
                 >
-                  {bossDefeated ? '—' : secondsLeft === 0 ? 'Готово' : `${secondsLeft} с`}
+                  {bossDefeated ? '—' : timeExpired ? 'Время' : secondsLeft === 0 ? 'Готово' : `${secondsLeft} с`}
                 </span>
               </button>
             );

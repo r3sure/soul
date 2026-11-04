@@ -32,7 +32,7 @@ export function buildDemoBattle(eventId: string): BattleEventView {
     bossId: boss.id,
     hp: boss.currentHp,
     initialHp: boss.initialHp,
-    timeLeftLabel: boss.endTimeLabel ?? '—',
+    timeLeftSeconds: boss.timeLeftSeconds ?? 0,
     participants: [...demoLeaderboard],
     featuredCharacterIds: demoLeaderboard.slice(0, 5).map((entry) => entry.characterId),
   };

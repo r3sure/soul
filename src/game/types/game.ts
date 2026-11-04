@@ -17,7 +17,7 @@ export type BossConfig = {
   initialHp: number;
   currentHp: number;
   durationMinutes: number;
-  endTimeLabel: string | null;
+  timeLeftSeconds: number | null;
   nextSpawnLabel: string | null;
   backgroundSpriteId: string;
   idleSpriteId: string;
@@ -49,7 +49,7 @@ export type BattleEventView = {
   bossId: string;
   hp: number;
   initialHp: number;
-  timeLeftLabel: string;
+  timeLeftSeconds: number;
   participants: LeaderboardEntry[];
   featuredCharacterIds: string[];
 };
@@ -61,4 +61,40 @@ export type PlayerCharacter = {
   level: number;
   guildName: string | null;
   spriteBaseId: string;
+};
+
+export type GuildRole = 'leader' | 'officer' | 'member';
+
+export type GuildUpgradeStatus = 'available' | 'locked' | 'complete';
+
+export type GuildMemberView = {
+  id: string;
+  name: string;
+  role: GuildRole;
+  level: number;
+  damage: number;
+  contribution: number;
+};
+
+export type GuildUpgradeView = {
+  id: string;
+  name: string;
+  description: string;
+  cost: number;
+  invested: number;
+  status: GuildUpgradeStatus;
+};
+
+export type GuildSummary = {
+  id: string;
+  name: string;
+  emblemSpriteId: string;
+  level: number;
+  description: string;
+  serverRank: number;
+  progress: { current: number; required: number };
+  members: GuildMemberView[];
+  upgrades: GuildUpgradeView[];
+  history: string[];
+  rankings: { damage: number; bossesDefeated: number; contribution: number };
 };
