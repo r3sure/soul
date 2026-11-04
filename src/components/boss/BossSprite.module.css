@@ -50,3 +50,32 @@
     animation: none;
   }
 }
+
+.boss[data-clip='false'][data-state='hit'] .sprite {
+  animation: boss-hit 420ms ease-out;
+}
+
+@keyframes boss-hit {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px) rotate(-1deg);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss[data-clip='false'][data-state='hit'] .sprite {
+    animation: none;
+  }
+}

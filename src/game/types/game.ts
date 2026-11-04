@@ -2,6 +2,21 @@ export type Faction = 'light' | 'dark';
 
 export type ClipState = 'idle' | 'attack' | 'hit' | 'death';
 
+export type CharacterSlot = 'horns' | 'head' | 'body' | 'hands' | 'legs' | 'sword' | 'effect';
+
+export type CharacterLayer = {
+  id: string;
+  slot: CharacterSlot;
+  spriteId: string;
+};
+
+export type CharacterAppearance = {
+  id: string;
+  name: string;
+  baseId: string;
+  layers: CharacterLayer[];
+};
+
 export type BossState = 'upcoming' | 'active' | 'defeated' | 'failed';
 
 export type DamageStage = {
@@ -44,16 +59,6 @@ export type LeaderboardEntry = {
   sharePercent: number;
 };
 
-export type BattleEventView = {
-  eventId: string;
-  bossId: string;
-  hp: number;
-  initialHp: number;
-  timeLeftSeconds: number;
-  participants: LeaderboardEntry[];
-  featuredCharacterIds: string[];
-};
-
 export type PlayerCharacter = {
   id: string;
   name: string;
@@ -61,6 +66,7 @@ export type PlayerCharacter = {
   level: number;
   guildName: string | null;
   spriteBaseId: string;
+  appearanceId: string;
 };
 
 export type GuildRole = 'leader' | 'officer' | 'member';

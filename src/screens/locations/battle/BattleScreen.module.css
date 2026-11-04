@@ -352,3 +352,130 @@
     grid-template-columns: 1fr;
   }
 }
+
+.timerValue[data-expired='true'] {
+  color: var(--color-crimson-bright);
+}
+
+.resultOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(3, 2, 6, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+.resultPanel {
+  width: min(560px, 96vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: var(--space-6);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, rgba(20, 16, 28, 0.98), rgba(6, 5, 10, 0.96));
+  box-shadow: var(--shadow-deep);
+  text-align: center;
+}
+
+.resultBadge {
+  display: inline-block;
+  padding: 2px var(--space-3);
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.resultBadge[data-result='defeated'] {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.resultBadge[data-result='failed'] {
+  border-color: var(--color-crimson-bright);
+  color: var(--color-crimson-bright);
+}
+
+.resultTitle {
+  margin: var(--space-3) 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-parchment);
+}
+
+.resultText {
+  margin: 0 0 var(--space-4);
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+
+.resultBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.resultBoard li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-line);
+  font-size: 0.8rem;
+}
+
+.resultBoard li:last-child {
+  border-bottom: 0;
+}
+
+.resultName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-parchment);
+}
+
+.resultGuild {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+}
+
+.resultRewards {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: rgba(20, 16, 28, 0.5);
+}
+
+.resultRewardsLabel {
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.resultRewardsValue {
+  font-size: 0.95rem;
+  color: var(--color-gold);
+}
+
+.resultNote {
+  font-size: 0.68rem;
+  color: var(--color-text-dim);
+}

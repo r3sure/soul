@@ -1,4 +1,4 @@
-import { hasSprite } from '@/assets/manifest';
+import { getSpriteUrl, hasSprite, isVideoUrl } from '@/assets/manifest';
 import { ClipPlayer } from '@/components/ui/ClipPlayer';
 import styles from './BossSprite.module.css';
 import type { ClipState } from '@/game/types/game';
@@ -20,14 +20,17 @@ export function BossSprite({
   state = 'idle',
   className,
 }: BossSpriteProps) {
-  const stateClip = state === 'idle' ? null : `${baseId}/${state}`;
-  const clipId = stateClip && hasSprite(stateClip) ? stateClip : stageSpriteId;
+  const stateClip = state === 'idle' ? `${baseId}/idle` : `${baseId}/${state}`;
+  const clipId = hasSprite(stateClip) ? stateClip : stageSpriteId;
+  const clipUrl = getSpriteUrl(clipId);
+  const animated = clipUrl ? isVideoUrl(clipUrl) : false;
 
   return (
     <div
       className={[styles.boss, className].filter(Boolean).join(' ')}
       data-hp={bucket(hpPercent)}
-      data-clip={hasSprite(clipId) ? 'true' : 'false'}
+      data-state={state}
+      data-clip={animated ? 'true' : 'false'}
     >
       <ClipPlayer
         clipId={clipId}

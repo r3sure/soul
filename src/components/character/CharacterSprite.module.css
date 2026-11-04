@@ -17,11 +17,53 @@
 }
 
 .sprite {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
   border-radius: var(--radius-md);
   filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.65));
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+}
+
+.layer[data-slot='legs'] {
+  z-index: 1;
+}
+
+.layer[data-slot='body'] {
+  z-index: 2;
+}
+
+.layer[data-slot='hands'] {
+  z-index: 3;
+}
+
+.layer[data-slot='head'] {
+  z-index: 4;
+}
+
+.layer[data-slot='horns'] {
+  z-index: 5;
+}
+
+.layer[data-slot='sword'] {
+  z-index: 6;
+}
+
+.layer[data-slot='effect'] {
+  z-index: 7;
 }
 
 @keyframes idle-bob {
